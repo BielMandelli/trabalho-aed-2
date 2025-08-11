@@ -1,7 +1,8 @@
 #include <stdio.h>
 #include "interface.h"
-#include "../livro/livro.h"
 #include "../arquivo/arquivo.h"
+#include "../arvore/arvore.h"
+#include "../livro/livro.h"
 
 //Ele mostra o menu com as opções do sistema
 //Pré-Condição: Nenhuma
@@ -15,7 +16,7 @@ void iniciar() {
     printf("5 - Remover Livro\n");
     printf("6 - Carregar Arquivo\n");
     printf("7 - Imprimir Lista de Registros Livres\n");
-    printf("8 - Imprimir árvore por níveis\n");
+    printf("8 - Imprimir arvore por niveis\n");
     printf("0 - Sair\n");
 }
 
@@ -31,31 +32,28 @@ void executa() {
         scanf("%d%*c", &opcao);
         switch (opcao) {
             case 1:
-                no_livro l = criar_livro();
-                inserir_livro(arql, l);
+                cadastrar_livro(arql);
                 break;
             case 2:
-                int codigo;
-                printf("Código do livro: ");
-                scanf("%d", &codigo);
-                no_livro res;
-                if (buscar_livro(arql, codigo, &res)) {
-                    printf("Título: %s\n Autor: %s\n Preco: %f", res.titulo, res.autor, res.preco);
-                } else {
-                    printf("Livro não encontrado.\n");
-                }
+                buscar_livro(arql);
                 break;
             case 3:
+                listar_livros(arql);
                 break;
             case 4:
+                qntd_livros(arql);
                 break;
             case 5:
+                remover_livro(arql);
                 break;
             case 6:
+                cadastrar_arquivo_livro(arql);
                 break;
             case 7:
+                imprime_registros_livres(arql);
                 break;
             case 8:
+                imprime_por_nivel(arql);
                 break;
         };
     }
